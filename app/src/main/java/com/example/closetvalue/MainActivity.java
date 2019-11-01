@@ -43,14 +43,70 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-
     }
 
-    public long addGarment(String name , String type , int uses , double price, String color,
-                           String size, String notes, SQLiteDatabase db){
+    public long addTop(String name , int uses , double price, String color,
+                           String size, String notes, String sleeveLength, SQLiteDatabase db){
         ContentValues values = new ContentValues();
+        values.put("id", (String) null);
         values.put("name", name);
-        values.put("type", type);
+        values.put("type", String.valueOf(GarmentTypes.TOP));
+        values.put("uses", uses);
+        values.put("price", price);
+        values.put("color", color);
+        values.put("size", size);
+        values.put("notes", notes);
+        values.put("sleeve_length", sleeveLength);
+        //values.put("leg_length", (String) null);
+
+
+        long newRowID = db.insert("Closet", null, values);
+        return newRowID;
+    }
+
+    public long addBottom(String name , int uses , double price, String color,
+                       String size, String notes, String legLength, SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+        values.put("id", (String) null);
+        values.put("name", name);
+        values.put("type", String.valueOf(GarmentTypes.BOTTOM));
+        values.put("uses", uses);
+        values.put("price", price);
+        values.put("color", color);
+        values.put("size", size);
+        values.put("notes", notes);
+        values.put("leg_length", legLength);
+        //values.put("sleeve_length", (String) null);
+
+
+        long newRowID = db.insert("Closet", null, values);
+        return newRowID;
+    }
+
+    public long addShoes(String name , int uses , double price, String color,
+                          String size, String notes, SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+        values.put("id", (String) null);
+        values.put("name", name);
+        values.put("type", String.valueOf(GarmentTypes.SHOES));
+        values.put("uses", uses);
+        values.put("price", price);
+        values.put("color", color);
+        values.put("size", size);
+        values.put("notes", notes);
+        //values.put("leg_length", (String) null);
+
+
+        long newRowID = db.insert("Closet", null, values);
+        return newRowID;
+    }
+
+    public long addOther(String name , int uses , double price, String color,
+                          String size, String notes, SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+        values.put("id", (String) null);
+        values.put("name", name);
+        values.put("type", String.valueOf(GarmentTypes.OTHER));
         values.put("uses", uses);
         values.put("price", price);
         values.put("color", color);

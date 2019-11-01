@@ -12,14 +12,16 @@ public class ClosetDB extends SQLiteOpenHelper {
     public static final int  DATABASE_VERSION = 1;
 
     private static final String CREATE_CLOSET_TABLE = "create table Closet(" +
-            "id Int, " +
+            "id INT PRIMARY KEY AUTOINCREMENT, " +
             "name Text, " +
             "type Text, " +
-            "uses Int, " +
+            "uses INT, " +
             "price Real, " +
             "color Text, " +
             "size Text, " +
-            "notes Text" +
+            "notes Text," +
+            "sleeve_length Text, " +
+            "leg_length Text" +
             ")";
 
     public ClosetDB(Context context) {
