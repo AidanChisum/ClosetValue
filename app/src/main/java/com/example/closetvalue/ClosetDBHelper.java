@@ -19,7 +19,7 @@ public class ClosetDBHelper extends SQLiteOpenHelper {
     public ClosetDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.i(TAG, " DBHelper created");
-        
+
     }
 
     @Override

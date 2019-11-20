@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_add_garment">Add a Garment</string>
+    <string name="content_add_garment">Your wardrobe is looking a little thin. Why not add more to it?</string>
+</resources>
