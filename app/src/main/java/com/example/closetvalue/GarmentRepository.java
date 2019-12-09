@@ -96,7 +96,7 @@ public class GarmentRepository {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            garmentDao.deleteAll();
+            garmentDao.deleteAllGarments();
             return null;
         }
     }

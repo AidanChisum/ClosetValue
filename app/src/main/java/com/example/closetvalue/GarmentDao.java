@@ -22,7 +22,7 @@ public interface GarmentDao {
     void delete(Garment garment);
 
     @Query("DELETE from garment_table")
-    void deleteAll();
+    void deleteAllGarments();
 
     @Query("SELECT * FROM garment_table")
     LiveData<List<Garment>> getAllGarments();

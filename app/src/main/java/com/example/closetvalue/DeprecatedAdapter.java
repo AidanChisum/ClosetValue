@@ -13,11 +13,9 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-class MyAdapter extends RecyclerView.Adapter {
+class DeprecatedAdapter extends RecyclerView.Adapter {
 
     Cursor mCursor;
 
@@ -49,13 +47,13 @@ class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public MyAdapter(Context context, Cursor cursor) {
+    public DeprecatedAdapter(Context context, Cursor cursor) {
 
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DeprecatedAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         //TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 //.inflate(R.layout.my_text_view, parent, false);
