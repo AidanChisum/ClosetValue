@@ -34,7 +34,7 @@ public class GarmentViewModel extends AndroidViewModel {
         repository.deleteAllGarments();
     }
 
-    public LiveData<List<Garment>> getAllNotes() {
+    public LiveData<List<Garment>> getAllGarments() {
         return allGarments;
     }
 }

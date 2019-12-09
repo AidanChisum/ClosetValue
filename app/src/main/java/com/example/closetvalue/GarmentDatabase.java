@@ -43,8 +43,7 @@ public abstract class GarmentDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            //TODO: populate database using inserts.
-            //garmentDao.insert(new Garment());
+            garmentDao.insert(new Garment("Hope","Shirt",0,14.99,"black","M", "Never give up hope"));
             return null;
         }
     }
