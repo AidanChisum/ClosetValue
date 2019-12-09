@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         garmentViewModel = ViewModelProviders.of(this).get(GarmentViewModel.class);
-        garmentViewModel.getAllNotes().observe(this, new Observer<List<Garment>>() {
+        garmentViewModel.getAllGarments().observe(this, new Observer<List<Garment>>() {
             @Override
             public void onChanged(@Nullable List<Garment> notes) {
                 //update RecyclerView
