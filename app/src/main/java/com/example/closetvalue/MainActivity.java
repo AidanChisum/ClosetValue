@@ -22,6 +22,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_GARMENT_REQUEST = 1;
+    public static final int EDIT_GARMENT_REQUEST = 2;
 
     private GarmentViewModel garmentViewModel;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAddGarment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddGarmentActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddEditGarmentActivity.class);
                 startActivityForResult(intent, ADD_GARMENT_REQUEST);
             }
         });
@@ -67,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Garment deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+        adapter.setOnItemClickListener(new GarmentAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Garment garment) {
+                Intent intent = new Intent(MainActivity.this, AddEditGarmentActivity.class);
+                intent.putExtra(AddEditGarmentActivity.EXTRA_ID, garment.getId());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_TITLE, garment.getName());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_DESCRIPTION, garment.getType());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_PRIORITY, garment.getUses());
+                startActivityForResult(intent, EDIT_GARMENT_REQUEST);
+            }
+        });
     }
 
     @Override
@@ -74,14 +87,31 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_GARMENT_REQUEST && resultCode == RESULT_OK) {
-            String title = data.getStringExtra(AddGarmentActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddGarmentActivity.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddGarmentActivity.EXTRA_PRIORITY, 1);
+            String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_TITLE);
+            String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_DESCRIPTION);
+            int priority = data.getIntExtra(AddEditGarmentActivity.EXTRA_PRIORITY, 1);
 
             Garment garment = new Garment(title, description, priority, 0.0, "", "", "");
             garmentViewModel.insert(garment);
 
             Toast.makeText(this, "Garment saved", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == EDIT_GARMENT_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(AddEditGarmentActivity.EXTRA_ID, -1);
+
+            if (id == -1) {
+                Toast.makeText(this, "Garment can't be updated", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_TITLE);
+            String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_DESCRIPTION);
+            int priority = data.getIntExtra(AddEditGarmentActivity.EXTRA_PRIORITY, 1);
+
+            Garment garment = new Garment(title, description, priority, 0.0, "", "", "");
+            garment.setId(id);
+            garmentViewModel.update(garment);
+
+            Toast.makeText(this, "Garment updated", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Garment not saved", Toast.LENGTH_SHORT).show();
         }

@@ -11,13 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddGarmentActivity extends AppCompatActivity {
+public class AddEditGarmentActivity extends AppCompatActivity {
+    public static final String EXTRA_ID =
+            "com.example.architectureexample.EXTRA_ID";
     public static final String EXTRA_TITLE =
-            "org.example.closetvalue.EXTRA_TITLE";
+            "com.example.architectureexample.EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION =
-            "org.example.closetvalue.EXTRA_DESCRIPTION";
+            "com.example.architectureexample.EXTRA_DESCRIPTION";
     public static final String EXTRA_PRIORITY =
-            "org.example.closetvalue.EXTRA_PRIORITY";
+            "com.example.architectureexample.EXTRA_PRIORITY";
 
     private EditText editTextTitle;
     private EditText editTextDescription;
@@ -35,8 +37,18 @@ public class AddGarmentActivity extends AppCompatActivity {
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
 
-        getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
-        setTitle("Add Garment");
+        getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_menu_save);
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Garment");
+            editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
+            editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+            numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1));
+        } else {
+            setTitle("Add Garment");
+        }
     }
 
     private void saveGarment() {
@@ -53,6 +65,11 @@ public class AddGarmentActivity extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_PRIORITY, priority);
+
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        if (id != -1) {
+            data.putExtra(EXTRA_ID, id);
+        }
 
         setResult(RESULT_OK, data);
         finish();
