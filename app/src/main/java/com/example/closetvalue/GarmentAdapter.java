@@ -40,6 +40,10 @@ public class GarmentAdapter extends RecyclerView.Adapter<GarmentAdapter.GarmentH
         notifyDataSetChanged();
     }
 
+    public Garment getGarmentAt(int position) {
+        return garments.get(position);
+    }
+
     class GarmentHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDescription;

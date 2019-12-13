@@ -2,6 +2,9 @@ package com.example.closetvalue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -9,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +53,20 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setGarments(garments);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                garmentViewModel.delete(adapter.getGarmentAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this, "Garment deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -60,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             String description = data.getStringExtra(AddGarmentActivity.EXTRA_DESCRIPTION);
             int priority = data.getIntExtra(AddGarmentActivity.EXTRA_PRIORITY, 1);
 
-            Garment garment = new Garment(title, description, priority, 0.0, "null", "null", "null");
+            Garment garment = new Garment(title, description, priority, 0.0, "", "", "");
             garmentViewModel.insert(garment);
 
             Toast.makeText(this, "Garment saved", Toast.LENGTH_SHORT).show();
@@ -69,4 +87,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_all_garments:
+                garmentViewModel.deleteAllGarments();
+                Toast.makeText(this, "All garments deleted", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
