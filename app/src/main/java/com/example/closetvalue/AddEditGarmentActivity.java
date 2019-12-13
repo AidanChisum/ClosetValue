@@ -37,7 +37,7 @@ public class AddEditGarmentActivity extends AppCompatActivity {
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
 
-        getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_menu_save);
+        getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
 
         Intent intent = getIntent();
 
