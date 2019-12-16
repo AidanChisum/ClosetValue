@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GarmentAdapter extends RecyclerView.Adapter<GarmentAdapter.GarmentHolder> {
     private List<Garment> garments = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -40,6 +41,10 @@ public class GarmentAdapter extends RecyclerView.Adapter<GarmentAdapter.GarmentH
         notifyDataSetChanged();
     }
 
+    public Garment getGarmentAt(int position) {
+        return garments.get(position);
+    }
+
     class GarmentHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDescription;
@@ -50,6 +55,25 @@ public class GarmentAdapter extends RecyclerView.Adapter<GarmentAdapter.GarmentH
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             textViewPriority = itemView.findViewById(R.id.text_view_priority);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(garments.get(position));
+                    }
+                }
+            });
         }
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(Garment garment);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 }
