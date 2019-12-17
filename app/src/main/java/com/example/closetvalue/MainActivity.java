@@ -74,9 +74,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(Garment garment) {
                 Intent intent = new Intent(MainActivity.this, AddEditGarmentActivity.class);
                 intent.putExtra(AddEditGarmentActivity.EXTRA_ID, garment.getId());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_TITLE, garment.getName());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_DESCRIPTION, garment.getType());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_PRIORITY, garment.getUses());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_NAME, garment.getName());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_TYPE, garment.getType());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_USES, garment.getUses());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_PRICE, garment.getPrice());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_COLOR, garment.getColor());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_SIZE, garment.getSize());
+                intent.putExtra(AddEditGarmentActivity.EXTRA_NOTES, garment.getNotes());
                 startActivityForResult(intent, EDIT_GARMENT_REQUEST);
             }
         });
@@ -87,11 +91,15 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_GARMENT_REQUEST && resultCode == RESULT_OK) {
-            String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddEditGarmentActivity.EXTRA_PRIORITY, 1);
+            String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_NAME);
+            String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_TYPE);
+            int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 1);
+            double price = Double.valueOf(data.getStringExtra(AddEditGarmentActivity.EXTRA_PRICE));
+            String color = data.getStringExtra(AddEditGarmentActivity.EXTRA_COLOR);
+            String size = data.getStringExtra(AddEditGarmentActivity.EXTRA_SIZE);
+            String notes = data.getStringExtra(AddEditGarmentActivity.EXTRA_NOTES);
 
-            Garment garment = new Garment(title, description, priority, 0.0, "", "", "");
+            Garment garment = new Garment(title, description, uses, 0.0, color, size, notes);
             garmentViewModel.insert(garment);
 
             Toast.makeText(this, "Garment saved", Toast.LENGTH_SHORT).show();
@@ -103,11 +111,15 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddEditGarmentActivity.EXTRA_PRIORITY, 1);
+            String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_NAME);
+            String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_TYPE);
+            int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 1);
+            double price = Double.valueOf(data.getStringExtra(AddEditGarmentActivity.EXTRA_PRICE));
+            String color = data.getStringExtra(AddEditGarmentActivity.EXTRA_COLOR);
+            String size = data.getStringExtra(AddEditGarmentActivity.EXTRA_SIZE);
+            String notes = data.getStringExtra(AddEditGarmentActivity.EXTRA_NOTES);
 
-            Garment garment = new Garment(title, description, priority, 0.0, "", "", "");
+            Garment garment = new Garment(title, description, uses, price, color, size, notes);
             garment.setId(id);
             garmentViewModel.update(garment);
 
