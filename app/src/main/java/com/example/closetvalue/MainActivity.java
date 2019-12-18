@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
             String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_NAME);
             String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_TYPE);
-            int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 1);
+            int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 0);
             double price = Double.valueOf(data.getStringExtra(AddEditGarmentActivity.EXTRA_PRICE));
             String color = data.getStringExtra(AddEditGarmentActivity.EXTRA_COLOR);
             String size = data.getStringExtra(AddEditGarmentActivity.EXTRA_SIZE);
