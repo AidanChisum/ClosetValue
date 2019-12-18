@@ -93,13 +93,20 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ADD_GARMENT_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_NAME);
             String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_TYPE);
-            int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 1);
-            double price = Double.valueOf(data.getStringExtra(AddEditGarmentActivity.EXTRA_PRICE));
+            int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 0);
+            String price = data.getStringExtra(AddEditGarmentActivity.EXTRA_PRICE);
             String color = data.getStringExtra(AddEditGarmentActivity.EXTRA_COLOR);
             String size = data.getStringExtra(AddEditGarmentActivity.EXTRA_SIZE);
             String notes = data.getStringExtra(AddEditGarmentActivity.EXTRA_NOTES);
 
-            Garment garment = new Garment(title, description, uses, 0.0, color, size, notes);
+            Garment garment;
+
+            if (price.isEmpty()) {
+                garment = new Garment(title, description, uses, 0.0, color, size, notes);
+            } else {
+                garment = new Garment(title, description, uses, Double.valueOf(price), color, size, notes);
+            }
+
             garmentViewModel.insert(garment);
 
             Toast.makeText(this, "Garment saved", Toast.LENGTH_SHORT).show();
