@@ -64,4 +64,8 @@ public class Garment {
     public String getNotes() {
         return notes;
     }
+
+    public void incrementUses() {
+        this.uses++;
+    }
 }

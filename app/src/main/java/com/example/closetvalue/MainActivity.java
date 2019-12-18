@@ -64,8 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                garmentViewModel.delete(adapter.getGarmentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Garment deleted", Toast.LENGTH_SHORT).show();
+                if (direction == ItemTouchHelper.RIGHT) {
+                    garmentViewModel.delete(adapter.getGarmentAt(viewHolder.getAdapterPosition()));
+                    Toast.makeText(MainActivity.this, "Garment deleted", Toast.LENGTH_SHORT).show();
+                } else if (direction == ItemTouchHelper.LEFT) {
+                    Garment garment = adapter.getGarmentAt(viewHolder.getAdapterPosition());
+                    garment.incrementUses();
+                    garmentViewModel.update(garment);
+                    Toast.makeText(MainActivity.this, "Added use for garment '" + garment.getName() + "'", Toast.LENGTH_SHORT).show();
+                }
             }
         }).attachToRecyclerView(recyclerView);
 
