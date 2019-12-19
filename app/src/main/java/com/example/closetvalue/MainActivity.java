@@ -102,17 +102,17 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra(AddEditGarmentActivity.EXTRA_NAME);
             String description = data.getStringExtra(AddEditGarmentActivity.EXTRA_TYPE);
             int uses = data.getIntExtra(AddEditGarmentActivity.EXTRA_USES, 0);
-            String price = data.getStringExtra(AddEditGarmentActivity.EXTRA_PRICE);
+            double price = data.getDoubleExtra(AddEditGarmentActivity.EXTRA_PRICE, 0.0);
             String color = data.getStringExtra(AddEditGarmentActivity.EXTRA_COLOR);
             String size = data.getStringExtra(AddEditGarmentActivity.EXTRA_SIZE);
             String notes = data.getStringExtra(AddEditGarmentActivity.EXTRA_NOTES);
 
             Garment garment;
 
-            if (price.isEmpty()) {
+            if (Double.isNaN(price)) {
                 garment = new Garment(title, description, uses, 0.0, color, size, notes);
             } else {
-                garment = new Garment(title, description, uses, Double.valueOf(price), color, size, notes);
+                garment = new Garment(title, description, uses, price, color, size, notes);
             }
 
             garmentViewModel.insert(garment);
