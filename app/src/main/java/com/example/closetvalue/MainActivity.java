@@ -23,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_GARMENT_REQUEST = 1;
     public static final int EDIT_GARMENT_REQUEST = 2;
+    public static final int GARMENT_RETURNED = 3;
 
     private GarmentViewModel garmentViewModel;
 
@@ -79,16 +80,16 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new GarmentAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Garment garment) {
-                Intent intent = new Intent(MainActivity.this, AddEditGarmentActivity.class);
-                intent.putExtra(AddEditGarmentActivity.EXTRA_ID, garment.getId());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_NAME, garment.getName());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_TYPE, garment.getType());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_USES, garment.getUses());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_PRICE, garment.getPrice());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_COLOR, garment.getColor());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_SIZE, garment.getSize());
-                intent.putExtra(AddEditGarmentActivity.EXTRA_NOTES, garment.getNotes());
-                startActivityForResult(intent, EDIT_GARMENT_REQUEST);
+                Intent intent = new Intent(MainActivity.this, GarmentInfoActivity.class);
+                intent.putExtra(GarmentInfoActivity.EXTRA_ID, garment.getId());
+                intent.putExtra(GarmentInfoActivity.EXTRA_NAME, garment.getName());
+                intent.putExtra(GarmentInfoActivity.EXTRA_TYPE, garment.getType());
+                intent.putExtra(GarmentInfoActivity.EXTRA_USES, garment.getUses());
+                intent.putExtra(GarmentInfoActivity.EXTRA_PRICE, garment.getPrice());
+                intent.putExtra(GarmentInfoActivity.EXTRA_COLOR, garment.getColor());
+                intent.putExtra(GarmentInfoActivity.EXTRA_SIZE, garment.getSize());
+                intent.putExtra(GarmentInfoActivity.EXTRA_NOTES, garment.getNotes());
+                startActivityForResult(intent, GARMENT_RETURNED);
             }
         });
     }
@@ -145,8 +146,10 @@ public class MainActivity extends AppCompatActivity {
             garmentViewModel.update(garment);
 
             Toast.makeText(this, "Garment updated", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Garment not saved", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == GARMENT_RETURNED && resultCode == RESULT_OK) {
+            Garment garment = (Garment) data.getExtras().getSerializable("RETURNED_GARMENT");
+            garmentViewModel.update(garment);
+            Toast.makeText(this, "[" + garment.getId() + "] Garment " + garment.getName() + " with uses " + garment.getUses(), Toast.LENGTH_SHORT).show();
         }
     }
 
