@@ -82,7 +82,12 @@ public class AddEditGarmentActivity extends AppCompatActivity {
         String name = editTextName.getText().toString();
         String type = editTextType.getText().toString();
         int uses = numberPickerUses.getValue();
-        double price = Double.valueOf(editTextPrice.getText().toString());
+        double price;
+        if (editTextPrice.getText().toString().matches("")) {
+            price = 0.0;
+        } else {
+            price = Double.valueOf(editTextPrice.getText().toString());
+        }
         String color = editTextColor.getText().toString();
         String size = editTextSize.getText().toString();
         String notes = editTextNotes.getText().toString();
