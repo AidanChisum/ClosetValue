@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GarmentInfoActivity">
+
+    <TextView
+        android:id="@+id/garmentInfoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Test"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/garmentInfoType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="@+id/garmentInfoName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoName"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoName" />
+
+    <TextView
+        android:id="@+id/garmentInfoUsesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Uses"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoType"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoType" />
+
+    <TextView
+        android:id="@+id/garmentInfoPriceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Price"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoType"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoUsesTitle" />
+
+    <TextView
+        android:id="@+id/garmentInfoColorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Color"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoType"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoPrice" />
+
+    <TextView
+        android:id="@+id/garmentInfoSizeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Size"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoType"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoColorTitle" />
+
+    <TextView
+        android:id="@+id/garmentInfoSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/garmentInfoSizeTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoSizeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoSizeTitle" />
+
+    <TextView
+        android:id="@+id/garmentInfoUses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/garmentInfoUsesTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoUsesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoUsesTitle" />
+
+    <TextView
+        android:id="@+id/garmentInfoPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/garmentInfoPriceTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoPriceTitle"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoPriceTitle" />
+
+    <TextView
+        android:id="@+id/garmentInfoColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/garmentInfoColorTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/garmentInfoColorTitle"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoColorTitle" />
+
+    <TextView
+        android:id="@+id/garmentInfoNotes"
+        android:layout_width="365dp"
+        android:layout_height="173dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garmentInfoSize" />
+</androidx.constraintlayout.widget.ConstraintLayout>

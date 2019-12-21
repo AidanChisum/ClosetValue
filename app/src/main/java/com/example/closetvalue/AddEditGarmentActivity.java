@@ -37,6 +37,8 @@ public class AddEditGarmentActivity extends AppCompatActivity {
     private EditText editTextSize;
     private EditText editTextNotes;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +52,17 @@ public class AddEditGarmentActivity extends AppCompatActivity {
         editTextSize = findViewById(R.id.edit_text_size);
         editTextNotes = findViewById(R.id.edit_text_notes);
 
+
         numberPickerUses.setMinValue(0);
-        numberPickerUses.setMaxValue(10);
+        numberPickerUses.setMaxValue(999);
 
         getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
 
-        Intent intent = getIntent();
+        if (getIntent().hasExtra(Intent.EXTRA_INTENT)) {
+            intent = getIntent().getParcelableExtra(Intent.EXTRA_INTENT);
+        } else {
+            intent = getIntent();
+        }
 
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Garment");
@@ -75,7 +82,12 @@ public class AddEditGarmentActivity extends AppCompatActivity {
         String name = editTextName.getText().toString();
         String type = editTextType.getText().toString();
         int uses = numberPickerUses.getValue();
-        String price = editTextPrice.getText().toString();
+        double price;
+        if (editTextPrice.getText().toString().matches("")) {
+            price = 0.0;
+        } else {
+            price = Double.valueOf(editTextPrice.getText().toString());
+        }
         String color = editTextColor.getText().toString();
         String size = editTextSize.getText().toString();
         String notes = editTextNotes.getText().toString();
@@ -95,7 +107,7 @@ public class AddEditGarmentActivity extends AppCompatActivity {
         data.putExtra(EXTRA_SIZE, size);
         data.putExtra(EXTRA_NOTES, notes);
 
-        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        int id = intent.getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
             data.putExtra(EXTRA_ID, id);
         }

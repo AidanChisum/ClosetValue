@@ -3,8 +3,10 @@ package com.example.closetvalue;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "garment_table")
-public class Garment {
+public class Garment implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -18,6 +20,7 @@ public class Garment {
 
     // CONSTRUCTOR
     public Garment(String name, String type, int uses, double price, String color, String size, String notes) {
+        super();
         this.name = name;
         this.type = type;
         this.uses = uses;
